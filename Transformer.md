@@ -68,7 +68,7 @@ Encoder由多个Encoder layer组成，每个Encoder layer包括三个部分: Mul
 
 ### Decoder端编码：
 
-通过embedding以及位置编码将每个单词映射成一个定长向量，再输入Decoder模块。shifted right的意义是给tgt语句的起始增加一个特殊的起始符号<s>，所以相当于原始的tgt序列整体右移一位。比如原始语句为“I am a student”右移后变为“<s> I am a student”。
+通过embedding以及位置编码将每个单词映射成一个定长向量，再输入Decoder模块。shifted right的意义是给tgt语句的起始增加一个特殊的起始符号`<s>`，所以相当于原始的tgt序列整体右移一位。比如原始语句为“`I am a student`”右移后变为“`<s> I am a student`”。
 
 输入：tgt [batch_size, tgt_len] (shifted right)
 
@@ -143,7 +143,7 @@ Decoder的Self-Attention需要tgt_mask [tgt_len, tgt_len]，为一个上三角�
 
 有两种训练策略：
 
-1. Free Running，以batch_size为1举例，按照时间顺序把模型的预测序列输入Decoder，得到模型得到输出[1, tgt_len, tgt_vocab_size]。将概率转化为对应的词后，输出为[1, tgt_len]的向量，选择对应i时刻的词作为本次的<img src="Transformer.assets/wpsD8FD.tmp.jpg" alt="img" style="zoom:67%;" /> 。</s>为句子结束的符号。缺点是如果中间某个时刻模型的输出严重偏离ground truth，会影响后续时刻的翻译。
+1. Free Running，以batch_size为1举例，按照时间顺序把模型的预测序列输入Decoder，得到模型得到输出[1, tgt_len, tgt_vocab_size]。将概率转化为对应的词后，输出为[1, tgt_len]的向量，选择对应i时刻的词作为本次的<img src="Transformer.assets/wpsD8FD.tmp.jpg" alt="img" style="zoom:67%;" /> 。`</s>`为句子结束的符号。缺点是如果中间某个时刻模型的输出严重偏离ground truth，会影响后续时刻的翻译。
 
    <img src="Transformer.assets/free-16407662616389.png" alt="free" style="zoom:50%;" />
 
