@@ -6,7 +6,7 @@
 
 <img src="Transformer.assets/image-20211229111607374.png" alt="image-20211229111607374" style="zoom: 67%;" />
 
-[^1]: 
+[^1]: Figure from ref 1
 
 ### Encoder端编码：
 
@@ -14,7 +14,7 @@
 
 位置编码：
 
-[^1]: 
+[^1]: Figure from ref 1
 
 <img src="Transformer.assets/image-20211229112046374.png" alt="image-20211229112046374" style="zoom:67%;" />
 
@@ -30,7 +30,7 @@ Encoder由多个Encoder layer组成，每个Encoder layer包括三个部分: Mul
 
 <img src="Transformer.assets/transformer_resideual_layer_norm_2.png" alt="img" style="zoom: 50%;" />
 
-[^2]: 
+[^2]: Figure from ref 2
 
 #### Multi-Head Self-Attention:
 
@@ -42,7 +42,7 @@ Encoder由多个Encoder layer组成，每个Encoder layer包括三个部分: Mul
 
 <img src="Transformer.assets/transformer_attention_heads_weight_matrix_o.png" alt="img" style="zoom: 50%;" />
 
-[^2]: 
+[^2]: Figure from ref 2
 
 对于Encoder来说**K,V,Q**来自于编码后的输入/前一个Encoder的输出（**R**）。
 
@@ -80,7 +80,7 @@ Decoder由多个Decoder layer组成，每个Decoder layer包括四个部分: Sel
 
 <img src="http://jalammar.github.io/images/t/transformer_resideual_layer_norm_3.png" alt="img" style="zoom: 50%;" />
 
-[^2]: 
+[^2]: Figure from ref 2
 
 #### Self-Attention with Mask: 
 
@@ -88,7 +88,7 @@ Decoder由多个Decoder layer组成，每个Decoder layer包括四个部分: Sel
 
 <img src="https://pic2.zhimg.com/80/v2-fe2972a408f2b5f08144bbc885b2f825_720w.jpg" alt="img" style="zoom:80%;" />
 
-[^5]: 
+[^5]: Figure from ref 5
 
 这样就能保证加权过程中，**每个时间的词只能与之前产生的词产生联系**。tgt_embed作为**K,V,Q**的来源。
 
@@ -116,7 +116,7 @@ Decoder由多个Decoder layer组成，每个Decoder layer包括四个部分: Sel
 
 <img src="http://jalammar.github.io/images/t/transformer_decoder_output_softmax.png" alt="img" style="zoom: 50%;" />
 
-[^2]: 
+[^2]: Figure from ref 2
 
 输入：dec_output [batch_size, tgt_len, d_model]
 
