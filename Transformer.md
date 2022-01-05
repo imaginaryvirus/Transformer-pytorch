@@ -6,7 +6,7 @@
 
 <img src="Transformer.assets/image-20211229111607374.png" alt="image-20211229111607374" style="zoom: 67%;" />
 
-[^1]: Figure from ref 1
+* [1]
 
 ### Encoder端编码：
 
@@ -14,7 +14,7 @@
 
 位置编码：
 
-[^1]: Figure from ref 1
+* [1]
 
 <img src="Transformer.assets/image-20211229112046374.png" alt="image-20211229112046374" style="zoom:67%;" />
 
@@ -30,11 +30,11 @@ Encoder由多个Encoder layer组成，每个Encoder layer包括三个部分: Mul
 
 <img src="Transformer.assets/transformer_resideual_layer_norm_2.png" alt="img" style="zoom: 50%;" />
 
-[^2]: Figure from ref 2
+* [2]
 
 #### Multi-Head Self-Attention:
 
-如果将一组<img src="D:\mynote\imaginaryvirus\深度学习笔记\assets\wpsAE98.tmp.jpg" alt="img" style="zoom: 80%;" />视为一个头，Multi-Head就是重复多组Self-Attention，每次的参数随机初始化，在训练之后，将输入映射到多个子空间。最终将每个head的输出<img src="file:///C:\Users\ainer\AppData\Local\Temp\ksohtml\wpsAE99.tmp.jpg" alt="img" style="zoom:80%;" />拼接为**Z**，并且通过<img src="file:///C:\Users\ainer\AppData\Local\Temp\ksohtml\wpsD2F2.tmp.jpg" alt="img" style="zoom:80%;" />对**Z**进行加权，得到最后的输出。
+如果将一组<img src="D:\mynote\imaginaryvirus\深度学习笔记\assets\wpsAE98.tmp.jpg" alt="img" style="zoom: 80%;" />视为一个头，Multi-Head就是重复多组Self-Attention，每次的参数随机初始化，在训练之后，将输入映射到多个子空间。最终将每个head的输出<img src="Transformer.assets/wpsED2.tmp.jpg" alt="img" style="zoom: 80%;" />拼接为**Z**，并且通过<img src="Transformer.assets/wps238F.tmp.jpg" alt="img" style="zoom:80%;" />对**Z**进行加权，得到最后的输出。
 
 <img src="Transformer.assets/wpsAE9A.tmp.jpg" alt="img" style="zoom:80%;" />
 
@@ -42,7 +42,7 @@ Encoder由多个Encoder layer组成，每个Encoder layer包括三个部分: Mul
 
 <img src="Transformer.assets/transformer_attention_heads_weight_matrix_o.png" alt="img" style="zoom: 50%;" />
 
-[^2]: Figure from ref 2
+* [2]
 
 对于Encoder来说**K,V,Q**来自于编码后的输入/前一个Encoder的输出（**R**）。
 
@@ -78,17 +78,17 @@ Encoder由多个Encoder layer组成，每个Encoder layer包括三个部分: Mul
 
 Decoder由多个Decoder layer组成，每个Decoder layer包括四个部分: Self-Attention with Mask，Encoder-Decoder Attention，Add&Norm，Feed Forward。
 
-<img src="http://jalammar.github.io/images/t/transformer_resideual_layer_norm_3.png" alt="img" style="zoom: 50%;" />
+<img src="Transformer.assets/transformer_resideual_layer_norm_3-16413899237699.png" alt="img" style="zoom: 50%;" />
 
-[^2]: Figure from ref 2
+* [2]
 
 #### Self-Attention with Mask: 
 
 对于Self-Attention的输入是ground truth 序列，为了防止信息泄露，对于一个长度为T的tgt序列，位置为i的词只能与前i个词计算权重（即i+1~T之后的词对应权重为0）。所以需要对输入做Mask操作，在Softmax操作前对权重矩阵（seq_len * seq_len）根据Mask矩阵对矩阵值填充-inf，Softmax后被遮盖部分的权重即为0：
 
-<img src="https://pic2.zhimg.com/80/v2-fe2972a408f2b5f08144bbc885b2f825_720w.jpg" alt="img" style="zoom:80%;" />
+<img src="Transformer.assets/v2-fe2972a408f2b5f08144bbc885b2f825_720w-16413899177645.jpg" alt="img" style="zoom:80%;" />
 
-[^5]: Figure from ref 5
+* [5]
 
 这样就能保证加权过程中，**每个时间的词只能与之前产生的词产生联系**。tgt_embed作为**K,V,Q**的来源。
 
@@ -114,9 +114,9 @@ Decoder由多个Decoder layer组成，每个Decoder layer包括四个部分: Sel
 
 得到了Decoder输出的向量，通过简单的全连接神经网络，它将解码器产生的向量投影到一个更大的向量中，称为logits向量。logits 向量的每个单元格对应一个唯一单词的分数。Softmax 层将这些分数转换为概率，选择概率最高的单元格，并生成与之关联的单词作为该时间步的输出。
 
-<img src="http://jalammar.github.io/images/t/transformer_decoder_output_softmax.png" alt="img" style="zoom: 50%;" />
+<img src="Transformer.assets/transformer_decoder_output_softmax-16413899063573.png" alt="img" style="zoom: 50%;" />
 
-[^2]: Figure from ref 2
+* [2]
 
 输入：dec_output [batch_size, tgt_len, d_model]
 
@@ -155,9 +155,15 @@ Transformer的训练策略采用Teacher Forcing，预测时由于没有ground tr
 
 ### 参考：
 
-[1]: https://dl.acm.org/doi/10.5555/3295222.3295349	"Attention is all you need"
-[2]: http://jalammar.github.io/illustrated-transformer/	"The Illustrated Transformer"
-[3]: https://pytorch.org/docs/stable/generated/torch.nn.Transformer.html?highlight=transformer#torch.nn.Transformer	"TRANSFORMER"
-[4]: https://blog.csdn.net/qq_30219017/article/details/89090690	"一文弄懂关于循环神经网络(RNN)的Teacher Forcing训练机制"
-[5]: https://zhuanlan.zhihu.com/p/139595546	"NLP 中的Mask全解 - 海晨威的文章 - 知乎"
+[1] Attention is all you need: https://dl.acm.org/doi/10.5555/3295222.3295349 
+
+[2] The Illustrated Transformer: http://jalammar.github.io/illustrated-transformer/ 
+
+[3] pytorch-TRANSFORMER: https://pytorch.org/docs/stable/generated/torch.nn.Transformer.html?highlight=transformer#torch.nn.Transformer 
+
+[4] 一文弄懂关于循环神经网络(RNN)的Teacher Forcing训练机制: https://blog.csdn.net/qq_30219017/article/details/89090690 
+
+[5] NLP 中的Mask全解 - 海晨威的文章: https://zhuanlan.zhihu.com/p/139595546 
+
+
 
